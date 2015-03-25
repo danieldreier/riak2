@@ -4,6 +4,13 @@
 # It sets variables according to platform.
 #
 class riak2::params {
+  $version          = 'present' # setting to latest could result in uplanned upgrades
+  $manage_repo      = true
+  $manage_package   = true
+  $riak_conf        = '/etc/riak/riak.conf'
+  $riak_user        = 'riak'
+  $riak_group       = 'riak'
+  $settings         = {}
   case $::osfamily {
     'Debian': {
       $package_name = 'riak'
