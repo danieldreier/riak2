@@ -22,5 +22,10 @@ describe 'riak2 class' do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
+    describe port(8087) do
+      it {
+        is_expected.to be_listening
+      }
+    end
   end
 end

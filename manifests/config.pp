@@ -60,5 +60,6 @@ class riak2::config {
     content => template('riak2/riak.conf.erb'),
     notify  => Service[$::riak2::service_name],
     before  => Service[$::riak2::service_name],
+    require => Package[$::riak2::package_name],
   }
 }
