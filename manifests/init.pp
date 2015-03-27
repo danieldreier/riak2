@@ -23,6 +23,7 @@ class riak2 (
   }
   if $manage_package {
     include ::riak2::install
+    Package[$::riak2::package_name] ~> File[$::riak2::params::riak_conf]
   }
   class { '::riak2::config': } ~>
   class { '::riak2::service': } ->
