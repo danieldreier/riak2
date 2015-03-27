@@ -1,4 +1,5 @@
 ## Don't use this module. It's still in development.
+[![Build Status](https://travis-ci.org/danieldreier/riak2.svg?branch=master)](https://travis-ci.org/danieldreier/riak2)
 
 #### Table of Contents
 
