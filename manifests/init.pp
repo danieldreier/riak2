@@ -16,7 +16,14 @@ class riak2 (
   $settings       = {},
 ) inherits ::riak2::params {
 
-  # validate parameters here
+  # basic input validation
+  # when we switch to puppet 4 DSL we can use typed variables
+  validate_string($package_name)
+  validate_string($service_name)
+  validate_bool($manage_package)
+  validate_bool($manage_repo)
+  validate_string($version)
+  validate_hash($settings)
 
   if $manage_repo and $manage_package {
     include ::riak2::repository
