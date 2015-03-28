@@ -20,15 +20,18 @@ This module manages the 2.x versions of the Riak distributed key-value store.
 
 ## Module Description
 
-This module installs the apt or yum repository, installs riak, and starts the riak service. This is a very crude module at this point, so no configuration is performed.
+This module installs the apt or yum repository, installs riak, and starts the
+riak service. This is a very basic module, and does not manage clusters, help
+rotate logs, backups, etc. It only manages the riak.conf file, not 
+advanced.config (yet). 
 
 ## Setup
 
 ### What riak2 affects
 
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form. 
+* This will install the basho apt or yum repository
+* Your /etc/riak.conf file will be overwritten
+* 
 
 ### Setup Requirements **OPTIONAL**
 
@@ -42,20 +45,58 @@ If your most recent release breaks compatibility or requires particular steps fo
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
+The most basic use case is to simply install riak with default settings:
 
-## Reference
+```puppet
+include ::riak
+```
 
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
+A slightly more interesting configuration will look something like the
+following, which has some defaults included for the sake of documentation.
+
+```puppet
+class { '::riak2':
+  package_name   => 'riak',   # default
+  service_name   => 'riak',   # default
+  manage_package => true,     # default
+  manage_repo    => true,     # default
+  version        => 'latest', # default, use a package version if desired
+  # settings in the settings hash are written directly to settings.conf.
+  settings       => {
+    'log.syslog'                              => 'on',
+    'erlang.schedulers.force_wakeup_interval' => '500',
+    'erlang.schedulers.compaction_of_load'    => false,
+    'buckets.default.last_write_wins'         => true,
+  },
+}
+```
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+This module is only expected to work with:
+
+  - Puppet 3.7 and newer
+  - needs future parser enabled
+  - needs structured facts enabled
+  - currently-maintained versions of MRI ruby and jruby. As of March 2015, this means 2.0.0, 2.1.5, or 2.2.1.
+
+Although some functionality may work without all of those, you shouldn't
+count on it to continue working.
+
+This module has been tested with Puppet 3.7 on Debian Wheezy, Ubuntu 12.04,
+Ubuntu 14.04, CentOS 6, and CentOS 7 using Beaker integration tests. However,
+there is no ongoing Beaker CI coverage, so only tagged releases have been tested
+using Beaker.
+
+A few caveats:
+
+- advanced.config is not managed
+- log rotation is not managed
+- the module doesn't help you make backups
+- module doesn't validate configuration settings at all
+
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
+Please contribute to this module. This module has extensive test coverage in
+order to make contributing easier. Please read CONTRIBUTING.md for details.
