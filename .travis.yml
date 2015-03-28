@@ -6,7 +6,7 @@ rvm:
   - 2.1.5
   - 2.0.0
   - 1.9.3
-  - jruby-head
+  - jruby-19mode
 script: bundle exec rake test
 env:
   - PUPPET_VERSION="~> 3.7.0" FUTURE_PARSER=yes
@@ -15,11 +15,11 @@ env:
   - PUPPET_VERSION="~> 3.6.0"
 matrix:
   exclude:
-  - rvm: jruby-head
+  - rvm: jruby-19mode
     env: PUPPET_VERSION="~> 3.6.0"
-  - rvm: jruby-head
+  - rvm: jruby-19mode
     env: PUPPET_VERSION="~> 3.7.0" FUTURE_PARSER=yes
-  - rvm: jruby-head
+  - rvm: jruby-19mode
     env: PUPPET_VERSION="~> 3.7.0"
   - rvm: 1.9.3
     env: PUPPET_VERSION="~> 3.6.0"
