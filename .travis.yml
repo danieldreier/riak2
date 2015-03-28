@@ -3,9 +3,9 @@ language: ruby
 bundler_args: --without development system_tests
 before_install: rm Gemfile.lock || true
 rvm:
-  - 2.2.1
   - 2.1.5
   - 2.0.0
+  - 1.9.3
   - jruby-head
 script: bundle exec rake test
 env:
@@ -29,3 +29,4 @@ matrix:
     env: PUPPET_VERSION="~> 3.7.0"
   allow_failures:
     - env: PUPPET_VERSION="~> 3.6.0"
+    - rvm: 1.9.3

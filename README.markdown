@@ -78,7 +78,7 @@ This module is only expected to work with:
   - Puppet 3.7 and newer
   - needs future parser enabled
   - needs structured facts enabled
-  - currently-maintained versions of MRI ruby and jruby. As of March 2015, this means 2.0.0, 2.1.5, or 2.2.1.
+  - currently-maintained versions of MRI ruby and jruby that are also supported by Puppet Labs. As of March 2015, this means 2.0.0 and 2.1.5. [2.2 won't be supported in the 3.x series](https://tickets.puppetlabs.com/browse/PUP-3796?focusedCommentId=154371&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-154371)
 
 Although some functionality may work without all of those, you shouldn't
 count on it to continue working.
